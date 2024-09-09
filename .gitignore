@@ -1,0 +1,15 @@
+# Node modules
+node_modules/
+
+# Arquivos de log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Diretórios de build
+dist/
+build/
+
+# Outros arquivos gerados
+*.tgz
+*.lock
