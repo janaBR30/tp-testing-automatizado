@@ -6,10 +6,12 @@ describe('Prueba de Cierre de Sesión', () => {
         // Asegúrate de que la página haya cargado
         cy.url().should('include', '/login');
         
-        // Espera explícita para asegurar que el campo de email esté presente
-        cy.get('input[name="email"]', { timeout: 10000 }).should('be.visible').type('usuario@example.com');
-        cy.get('input[name="password"]').should('be.visible').type('password');
-        cy.get('button[type="submit"]').should('be.visible').click();
+        // Usa el selector id para encontrar el campo de email y contraseña
+        cy.get('#email', { timeout: 10000 }).should('be.visible').type('usuario@example.com');
+        cy.get('#password').should('be.visible').type('password');
+        
+        // Usa el id del botón para hacer clic en submit
+        cy.get('#submit').should('be.visible').click();
 
         // Verifica que el usuario haya iniciado sesión correctamente
         cy.url().should('include', '/contactList'); // Asegúrate de que la URL correcta esté presente
