@@ -1,0 +1,11 @@
+{
+    "user": {
+      "_id": "608b2db1add2691791c04c89",
+      "firstName": "Updated",
+      "lastName": "Username",
+      "email": "test2@fake.com",
+      "__v": 212
+    },
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MDgyMWYzMDYyZmJiMjEzZTJhZDlhMjAiLCJpYXQiOjE2MTk3MzQ0NDB9.4CftGzYRmK04PJv6xKqmWWo9iOH2wlizEU8vk-L48LI"
+  }
+  
