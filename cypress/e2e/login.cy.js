@@ -4,7 +4,7 @@ describe('Login de Usuario a través de la API', () => {
         cy.readFile('cypress/fixtures/userData.json').then((userData) => {
             const loginData = {
                 email: userData.email,  // Usa el email del JSON
-                password: 'contraseña123' // Asegúrate de que la contraseña sea la correcta
+                password: userData.password // Asegúrate de que la contraseña sea la correcta
             };
 
             // Realiza la llamada a la API para hacer login
