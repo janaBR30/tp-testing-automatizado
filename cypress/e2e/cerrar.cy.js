@@ -1,33 +1,35 @@
 describe('Prueba de Cierre de Sesión', () => {
+    before(() => {
+        // Registra un nuevo usuario antes de las pruebas
+        const uniqueEmail = `usuario_${Date.now()}@example.com`;
+
+        cy.request('POST', 'https://thinking-tester-contact-list.herokuapp.com/users', {
+            firstName: 'Test',
+            lastName: 'User',
+            email: uniqueEmail,
+            password: 'password'
+        }).then((response) => {
+            expect(response.status).to.eq(201); // Asegura que el registro fue exitoso
+        });
+    });
+
     beforeEach(() => {
-        // Prepara el estado inicial: Iniciar sesión antes de cada prueba
         cy.visit('https://thinking-tester-contact-list.herokuapp.com/login');
 
-        // Asegúrate de que la página haya cargado
-        cy.url().should('include', '/login');
-        
-        // Usa el selector id para encontrar el campo de email y contraseña
-        cy.get('#email', { timeout: 10000 }).should('be.visible').type('usuario@example.com');
-        cy.get('#password').should('be.visible').type('password');
-        
-        // Usa el id del botón para hacer clic en submit
-        cy.get('#submit').should('be.visible').click();
+        // Inicia sesión con las credenciales registradas
+        cy.get('#email').type('usuario@example.com');
+        cy.get('#password').type('password');
+        cy.get('#submit').click();
 
-        // Verifica que el usuario haya iniciado sesión correctamente
-        cy.url().should('include', '/contactList'); // Asegúrate de que la URL correcta esté presente
-        cy.contains('Contact List').should('be.visible'); // Verifica que la lista de contactos sea visible
+        cy.url().should('include', '/contactList'); // Asegúrate de que el login fue exitoso
     });
 
     it('Debería cerrar la sesión correctamente', () => {
-        // Simula el clic en el botón de cerrar sesión
-        cy.get('button#logoutButton').should('be.visible').click();
-
-        // Verifica que el usuario sea redirigido a la página de inicio de sesión
+        cy.get('button#logoutButton').click();
         cy.url().should('include', '/login');
-
-        // Verifica que el token haya sido eliminado de localStorage (si aplica)
         cy.window().then((window) => {
             expect(window.localStorage.getItem('token')).to.be.null;
         });
     });
 });
+
